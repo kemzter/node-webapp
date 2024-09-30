@@ -5,7 +5,7 @@ pipeline {
        steps {
 	 scripts {
 	   sh "docker kill nodeapp || true"
-	   docker.build("my-image:${env.BUILD_ID}"
+	   docker.build("my-image:${env.BUILD_ID}")
 	 }
        }
      }
