@@ -12,7 +12,7 @@ pipeline {
         stage ('deploy') {
             steps {
                 script {
-                    docker.image('my-image:${env.BUILD_ID}').withRun('--name nodeapp -p 3000:3000 -d')
+                    docker.image('my-image:${env.BUILD_ID}').withRun('--name nodeapp -p 3000:3000 -d') {}
                 }
             }
         }
