@@ -4,15 +4,16 @@ pipeline {
      stage ('setup') {
        steps {
 	 scripts {
-	    docker.build("my-image:${env.BUILD_ID}"
+	   sh "docker kill nodeapp"
+	   docker.build("my-image:${env.BUILD_ID}"
 	 }
        }
      }
      stage ('deploy') {
        steps {
-	scripts {
-	  docker.image('my-image:${env.BUILD_ID}').withRun('-p 3000:3000 -d')
-	}
+         scripts {
+	   docker.image('my-image:${env.BUILD_ID}').withRun('--name nodeapp -p 3000:3000 -d')
+	 }
        }
      }
    }
