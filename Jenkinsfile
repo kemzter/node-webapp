@@ -3,12 +3,16 @@ pipeline {
    stages {
      stage ('setup') {
        steps {
-         sh "docker build -t my-image:${env.BUILD_ID} ."
+	 scripts {
+	    docker.build("my-image:${env.BUILD_ID}"
+	 }
        }
      }
      stage ('deploy') {
        steps {
-	 sh "docker run -d -p 3000:3000 my-image:${env.BUILD_ID}"
+	scripts {
+	  docker.image('my-image:${env.BUILD_ID}').withRun('-p 3000:3000 -d')
+	}
        }
      }
    }
